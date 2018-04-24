@@ -35,9 +35,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Subscriber;
 
 public class LoginActivity extends Activity {
 
@@ -159,17 +158,30 @@ public class LoginActivity extends Activity {
     }
 
     private void doLoginActionInRetrofitAndRxjava() {
-        String baseUrl = "http://172.20.10.2:8080/NCD_Server/";
+        String baseUrl = "http://116.62.108.201:8080/NCD_Server/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         UserService userService = retrofit.create(UserService.class);
         userService.loginService2("xsx", "xsx127")
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .doOnNext(new Consumer<User>() {
+                    @Override
+                    public void accept(User user) throws Exception {
+                        Log.i("xsx", "save user: "+user.getName());
+                    }
+                })
+                .doOnNext(new Consumer<User>() {
+                    @Override
+                    public void accept(User user) throws Exception {
+                        Log.i("xsx", "save user2: "+user.getName());
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<User>() {
                     @Override

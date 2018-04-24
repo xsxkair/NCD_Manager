@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="lunch_view_pager_item_ids">
+        <item>@drawable/lunch_item1</item>
+        <item>@drawable/lunch_item2</item>
+        <item>@drawable/lunch_item3</item>
+        <item>@drawable/lunch_item4</item>
+    </integer-array>
+</resources>
