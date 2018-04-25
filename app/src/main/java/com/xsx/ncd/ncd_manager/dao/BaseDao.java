@@ -1,4 +1,4 @@
-package com.xsx.ncd.dao;
+package com.xsx.ncd.ncd_manager.dao;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.xsx.ncd.ncd_manager;
+package com.xsx.ncd.ncd_manager.Activitys;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -16,16 +15,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xsx.ncd.entity.User;
-import com.xsx.ncd.services.UserService;
-import com.xsxkair.perportylibrary.Perportys.StringPerporty;
-
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.xsx.ncd.ncd_manager.EventBus.MessageEvent;
+import com.xsx.ncd.ncd_manager.R;
+import com.xsx.ncd.ncd_manager.entity.User;
+import com.xsx.ncd.ncd_manager.Http.HttpServices.UserService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -115,6 +115,19 @@ public class LoginActivity extends Activity {
             }
             return true;
         });
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MainThread)
+    public void onMessageEvent(MessageEvent event){
+        Log.d("xsx", "recv msg: "+event.getMsg());
     }
 
     @OnClick({R.id.login_rememberpassword, R.id.login_autologin, R.id.submite_button})

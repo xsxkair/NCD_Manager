@@ -1,4 +1,4 @@
-package com.xsx.ncd.entity;
+package com.xsx.ncd.ncd_manager.entity;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

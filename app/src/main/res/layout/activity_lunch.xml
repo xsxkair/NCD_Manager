@@ -5,6 +5,24 @@
     android:layout_height="match_parent"
     android:background="#0099cc">
 
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@anim/lunch_right_in"
+        android:outAnimation="@anim/lunch_right_out"
+        android:flipInterval="3000">
+
+        <include layout="@layout/lunch_view_pager_item1" />
+
+        <include layout="@layout/lunch_view_pager_item2" />
+
+        <include layout="@layout/lunch_view_pager_item3" />
+
+        <include layout="@layout/lunch_view_pager_item4" />
+
+    </ViewFlipper>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,16 +36,6 @@
             android:layout_centerHorizontal="true"
             android:text="@string/system_init_text"
             android:textSize="24sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/colorAccent"/>
     </RelativeLayout>
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/lunch_pagerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
-
-    </android.support.v4.view.ViewPager>
-
 </FrameLayout>

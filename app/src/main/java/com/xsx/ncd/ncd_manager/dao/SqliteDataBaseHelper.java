@@ -1,4 +1,4 @@
-package com.xsx.ncd.dao;
+package com.xsx.ncd.ncd_manager.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,7 +7,7 @@ import android.util.Log;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.xsx.ncd.entity.User;
+import com.xsx.ncd.ncd_manager.entity.User;
 
 import java.sql.SQLException;
 

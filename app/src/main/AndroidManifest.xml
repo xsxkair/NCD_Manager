@@ -11,12 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service android:name=".Services.SerialService">
+            <intent-filter>
+                <action android:name="com.xsx.ncd.ncd_manager.Services.SerialService"/>
+            </intent-filter>
+        </service>
+
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activitys.LoginActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar">
         </activity>
         <activity
-            android:name=".LunchActivity"
+            android:name=".Activitys.LunchActivity"
             android:label="@string/title_activity_lunch"
             android:theme="@android:style/Theme.Light.NoTitleBar">
             <intent-filter>

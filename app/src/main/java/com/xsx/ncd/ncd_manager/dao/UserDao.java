@@ -1,8 +1,8 @@
-package com.xsx.ncd.dao;
+package com.xsx.ncd.ncd_manager.dao;
 
 import android.content.Context;
 
-import com.xsx.ncd.entity.User;
+import com.xsx.ncd.ncd_manager.entity.User;
 
 
 public class UserDao extends BaseDao<User> {
