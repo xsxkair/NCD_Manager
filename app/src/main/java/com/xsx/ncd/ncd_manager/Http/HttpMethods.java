@@ -1,13 +1,17 @@
 package com.xsx.ncd.ncd_manager.Http;
 
 import com.xsx.ncd.ncd_manager.Http.HttpServices.UserService;
+import com.xsx.ncd.ncd_manager.entity.User;
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observer;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Query;
 
 public class HttpMethods {
 
@@ -42,5 +46,20 @@ public class HttpMethods {
         return SingletonHolder.INSTANCE;
     }
 
-
+    //user service
+   /* public void login(Observer<User> userObserver, String account, String password){
+        userService.loginService2(account, password)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe(userObserver);
+    }*/
+    public void login(Observer<String> userObserver, String account, String password){
+        userService.loginService2(account, password)
+                .map(new HttpResultFunction<User, String>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread())
+                .subscribe(userObserver);
+    }
 }

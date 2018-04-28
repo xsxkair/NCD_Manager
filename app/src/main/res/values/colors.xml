@@ -6,4 +6,8 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="white">#ffffff</color>
+
+    <color name="ncd_blue">#1B3F82</color>
+    <color name="button_no_pressed">#006699</color>
+    <color name="button_pressed">#6699CC</color>
 </resources>

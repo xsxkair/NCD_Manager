@@ -1,0 +1,1 @@
+adb install -r signed_xsx.apk

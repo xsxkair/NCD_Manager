@@ -11,17 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <service android:name=".Services.SerialService">
             <intent-filter>
-                <action android:name="com.xsx.ncd.ncd_manager.Services.SerialService"/>
+                <action android:name="com.xsx.ncd.ncd_manager.Services.SerialService" />
             </intent-filter>
         </service>
 
         <activity
             android:name=".Activitys.LoginActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar">
-        </activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".Activitys.LunchActivity"
             android:label="@string/title_activity_lunch"
@@ -32,6 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activitys.MainActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
     </application>
 
 </manifest>

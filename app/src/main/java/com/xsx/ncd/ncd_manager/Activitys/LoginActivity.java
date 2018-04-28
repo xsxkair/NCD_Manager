@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xsx.ncd.ncd_manager.EventBus.MessageEvent;
+import com.xsx.ncd.ncd_manager.Http.HttpMethods;
 import com.xsx.ncd.ncd_manager.R;
 import com.xsx.ncd.ncd_manager.entity.User;
 import com.xsx.ncd.ncd_manager.Http.HttpServices.UserService;
@@ -26,10 +27,12 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,6 +59,7 @@ public class LoginActivity extends Activity {
     private User user;
 
     private Retrofit retrofit;
+    Observer<String> userObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,18 +120,36 @@ public class LoginActivity extends Activity {
             return true;
         });
 
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
+
+        userObserver = new Observer<String>(){
+
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String user) {
+                Log.d("xsx", user);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("xsx", e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
+     //   EventBus.getDefault().unregister(this);
         super.onDestroy();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    public void onMessageEvent(MessageEvent event){
-        Log.d("xsx", "recv msg: "+event.getMsg());
     }
 
     @OnClick({R.id.login_rememberpassword, R.id.login_autologin, R.id.submite_button})
@@ -171,52 +193,7 @@ public class LoginActivity extends Activity {
     }
 
     private void doLoginActionInRetrofitAndRxjava() {
-        String baseUrl = "http://116.62.108.201:8080/NCD_Server/";
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-
-        UserService userService = retrofit.create(UserService.class);
-        userService.loginService2("xsx", "xsx127")
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .doOnNext(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) throws Exception {
-                        Log.i("xsx", "save user: "+user.getName());
-                    }
-                })
-                .doOnNext(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) throws Exception {
-                        Log.i("xsx", "save user2: "+user.getName());
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<User>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(User user) {
-                        Log.i("xsx", user.toString());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        HttpMethods.getInstance().login(userObserver, accountEdittext.getText().toString(), passwordEdittext.getText().toString());
     }
 
     private Handler loginHandler = new Handler() {

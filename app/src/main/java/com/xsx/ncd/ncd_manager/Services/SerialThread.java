@@ -10,6 +10,8 @@ public class SerialThread extends Thread {
 
     private boolean threadControlFlag = true;
 
+    private int sendCnt = 0;
+
     public SerialThread(){
         threadControlFlag = true;
     }
@@ -25,8 +27,12 @@ public class SerialThread extends Thread {
     @Override
     public void run() {
         while(threadControlFlag){
-            Log.d("xsx", "read data from serial");
+
             EventBus.getDefault().post(new MessageEvent("xsx"));
+
+            sendCnt++;
+            if(sendCnt > 10)
+                stopSerialThread();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

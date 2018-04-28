@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">NCD_Manager</string>
-
+    <string name="app_version">V 1.0.00</string>
     /*
     *lunch
     */
@@ -12,6 +12,16 @@
     <string name="auto_login_text">自动登录</string>
     <string name="login_text">登录</string>
 
+    /*
+    * bottom layout
+    */
+    <string name="ncd_company_name_text">武汉纽康度生物科技股份有限公司</string>
+
+    /*
+    *   main activity
+    */
+    <string name="start_test_button_text">开始测试</string>
+    <string name="query_data_button_text">数据查询</string>
 
     /*
     * url
@@ -21,5 +31,7 @@
     <string name="title_activity_lunch">LunchActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>
