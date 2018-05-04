@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.xsx.ncd.ncd_manager.EventBus.MessageEvent;
 import com.xsx.ncd.ncd_manager.Http.HttpMethods;
 import com.xsx.ncd.ncd_manager.R;
@@ -109,6 +111,7 @@ public class LoginActivity extends Activity {
                     submiteButton.setEnabled(false);
             }
         });
+
         passwordEdittext.setOnEditorActionListener((v, actionid, event)->{
             switch (actionid){
                 case EditorInfo.IME_ACTION_DONE:
@@ -144,6 +147,7 @@ public class LoginActivity extends Activity {
 
             }
         };
+
     }
 
     @Override

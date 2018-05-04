@@ -1,31 +1,25 @@
 package com.xsx.ncd.ncd_manager.Activitys;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.gesture.GestureLibrary;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.xsx.ncd.ncd_manager.EventBus.MessageEvent;
+import com.xsx.ncd.ncd_manager.Dao.DataBaseMethods;
 import com.xsx.ncd.ncd_manager.R;
 import com.xsx.ncd.ncd_manager.SerialDriver.SerialMethods;
-import com.xsx.ncd.ncd_manager.Services.SerialService;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
-import de.greenrobot.event.ThreadMode;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -46,11 +40,9 @@ public class LunchActivity extends Activity {
         ButterKnife.bind(this);
 
         viewFlipper.startFlipping();
-
-        //创建启动Service的Intent,以及Intent属性
-        /*final Intent intent = new Intent(this, SerialService.class);
-        intent.setAction("com.xsx.ncd.ncd_manager.Services.SerialService");
-        startService(intent);*/
+        viewFlipper.setOnClickListener(v -> {
+            startActivity(new Intent(LunchActivity.this, MainActivity.class));
+        });
 
         bordIsReadyStatusObserver = new Observer<Boolean>() {
             @Override
@@ -60,7 +52,13 @@ public class LunchActivity extends Activity {
 
             @Override
             public void onNext(Boolean aBoolean) {
-                startActivity(new Intent(LunchActivity.this, MainActivity.class));
+                if(aBoolean){
+                    Log.d("xsx", "recv: true");
+                    startActivity(new Intent(LunchActivity.this, MainActivity.class));
+                }
+                else
+                    Log.d("xsx", "recv: false");
+
             }
 
             @Override
@@ -75,6 +73,13 @@ public class LunchActivity extends Activity {
         };
 
         timer.schedule(task, 0, 10000);
+
+        DataBaseMethods.getInstance().DataBaseMethodsInit(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

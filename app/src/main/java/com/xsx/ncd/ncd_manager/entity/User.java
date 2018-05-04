@@ -10,34 +10,22 @@ public class User {
     private Integer id;
 
     @DatabaseField(canBeNull = false)
-    private String account;
-
-    @DatabaseField(canBeNull = false)
-    private String password;
+    private String userid;
 
     @DatabaseField(canBeNull = false)
     private String name;
 
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean createqr;
+    @DatabaseField(canBeNull = true, defaultValue = "false", columnDefinition = "bit(1)")
+    private Boolean men;
 
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean checkqr;
+    @DatabaseField(canBeNull = true)
+    private String age;
 
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean adduser;
+    @DatabaseField(canBeNull = true)
+    private String phone;
 
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean deluser;
-
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean edituser;
-
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean upsoft;
-
-    @DatabaseField(defaultValue = "false", columnDefinition = "bit(1)", canBeNull = false)
-    private Boolean downsoft;
+    @DatabaseField(canBeNull = true)
+    private String dep;
 
     public Integer getId() {
         return id;
@@ -45,22 +33,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -71,69 +43,56 @@ public class User {
         this.name = name;
     }
 
-    public Boolean getCreateqr() {
-        return createqr;
+    public Boolean getMen() {
+        return men;
     }
 
-    public void setCreateqr(Boolean createqr) {
-        this.createqr = createqr;
+    public void setMen(Boolean men) {
+        this.men = men;
     }
 
-    public Boolean getCheckqr() {
-        return checkqr;
+    public String getAge() {
+        return age;
     }
 
-    public void setCheckqr(Boolean checkqr) {
-        this.checkqr = checkqr;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public Boolean getAdduser() {
-        return adduser;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAdduser(Boolean adduser) {
-        this.adduser = adduser;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public Boolean getDeluser() {
-        return deluser;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setDeluser(Boolean deluser) {
-        this.deluser = deluser;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    public Boolean getEdituser() {
-        return edituser;
+    public String getDep() {
+        return dep;
     }
 
-    public void setEdituser(Boolean edituser) {
-        this.edituser = edituser;
-    }
-
-    public Boolean getUpsoft() {
-        return upsoft;
-    }
-
-    public void setUpsoft(Boolean upsoft) {
-        this.upsoft = upsoft;
-    }
-
-    public Boolean getDownsoft() {
-        return downsoft;
-    }
-
-    public void setDownsoft(Boolean downsoft) {
-        this.downsoft = downsoft;
+    public void setDep(String dep) {
+        this.dep = dep;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
+                ", userid='" + userid + '\'' +
                 ", name='" + name + '\'' +
+                ", men=" + men +
+                ", age='" + age + '\'' +
+                ", phone='" + phone + '\'' +
+                ", dep='" + dep + '\'' +
                 '}';
     }
 }

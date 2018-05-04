@@ -16,7 +16,7 @@ public class SerialEntity {
 
     private byte[] data;                         //change enable
 
-    private int checksum;                               // start - data, 1 byte
+    private int checksum;                               // deviceaddr - data, 1 byte
 
     public SerialEntity(){
 

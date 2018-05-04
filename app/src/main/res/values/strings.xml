@@ -18,10 +18,35 @@
     <string name="ncd_company_name_text">武汉纽康度生物科技股份有限公司</string>
 
     /*
-    *   main activity
+    * main activity
     */
     <string name="start_test_button_text">开始测试</string>
     <string name="query_data_button_text">数据查询</string>
+
+    /*
+    * set activity
+    */
+    <string name="setting_menu_device_info_text">设备信息</string>
+    <string name="setting_menu_user_set_text">操作人管理</string>
+    <string name="setting_menu_net_set_text">网络设置</string>
+    <string name="setting_menu_data_query_text">数据查询</string>
+    <string name="setting_menu_other_set_text">其他设置</string>
+    <string name="setting_menu_about_us_text">关于</string>
+
+
+    /*
+    * user management activity
+    */
+    <string name="userListText">操作人列表</string>
+    <string name="addUserText">添加操作人</string>
+    <string name="userIdText">工&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;号：</string>
+    <string name="userNameText">姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;名：</string>
+    <string name="userSexText">性&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;别：</string>
+    <string name="userAgeText">年&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;龄：</string>
+    <string name="userDepText">科&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;室：</string>
+    <string name="userPhoneText">联系方式：</string>
+    <string name="cancelButtonText">取消</string>
+    <string name="submitButtonText">提交</string>
 
     /*
     * url
@@ -34,4 +59,5 @@
 
     <string name="title_activity_main">MainActivity</string>
 
+    <string name="waitting_dialog_text">请等待。。。</string>
 </resources>
