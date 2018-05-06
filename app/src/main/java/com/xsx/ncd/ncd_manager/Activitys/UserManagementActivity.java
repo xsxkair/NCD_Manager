@@ -7,13 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.xsx.ncd.ncd_manager.Activitys.Adapter.UserAdapter;
-import com.xsx.ncd.ncd_manager.Activitys.Adapter.UserDecoration;
 import com.xsx.ncd.ncd_manager.Activitys.Dialogs.AddUserDialog;
 import com.xsx.ncd.ncd_manager.Activitys.Dialogs.WaitDialog;
 import com.xsx.ncd.ncd_manager.Dao.DataBaseMethods;
@@ -35,6 +37,27 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
     RecyclerView userRecyclerView;
     @BindView(R.id.freshUserListImageView)
     ImageView freshUserListImageView;
+    @BindView(R.id.userNameEditView)
+    EditText userNameEditView;
+    @BindView(R.id.userIdEditView)
+    EditText userIdEditView;
+    @BindView(R.id.userAgeEditView)
+    EditText userAgeEditView;
+    @BindView(R.id.userSexMenRadioButton)
+    RadioButton userSexMenRadioButton;
+    @BindView(R.id.btnWoman)
+    RadioButton btnWoman;
+    @BindView(R.id.userSexRadioGroup)
+    RadioGroup userSexRadioGroup;
+    @BindView(R.id.userPhoneEditText)
+    EditText userPhoneEditText;
+    @BindView(R.id.userDepEditText)
+    EditText userDepEditText;
+    @BindView(R.id.deleteUserButton)
+    Button deleteUserButton;
+    @BindView(R.id.submitUserButton)
+    Button submitUserButton;
+
 
     private AddUserDialog addUserDialog;
     private WaitDialog waitDialog;
@@ -91,22 +114,22 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
         userAdapter.setOnItemSwipeListener(new OnItemSwipeListener() {
             @Override
             public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d("xsx", "onItemSwipeStart= "+pos);
+                Log.d("xsx", "onItemSwipeStart= " + pos);
             }
 
             @Override
             public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d("xsx", "clearView= "+pos);
+                Log.d("xsx", "clearView= " + pos);
             }
 
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d("xsx", "onItemSwiped= "+pos);
+                Log.d("xsx", "onItemSwiped= " + pos);
             }
 
             @Override
             public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
-                Log.d("xsx", "onItemSwipeMoving= "+viewHolder.getAdapterPosition());
+                Log.d("xsx", "onItemSwipeMoving= " + viewHolder.getAdapterPosition());
             }
         });
 
@@ -126,7 +149,7 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
 
             @Override
             public void onError(Throwable e) {
-                Log.d("xsx", "query all user error: "+e.getMessage());
+                Log.d("xsx", "query all user error: " + e.getMessage());
             }
 
             @Override

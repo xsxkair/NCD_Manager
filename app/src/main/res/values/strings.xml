@@ -39,6 +39,7 @@
     */
     <string name="userListText">操作人列表</string>
     <string name="addUserText">添加操作人</string>
+    <string name="userInfoTitle">操作人信息</string>
     <string name="userIdText">工&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;号：</string>
     <string name="userNameText">姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;名：</string>
     <string name="userSexText">性&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;别：</string>
@@ -47,6 +48,7 @@
     <string name="userPhoneText">联系方式：</string>
     <string name="cancelButtonText">取消</string>
     <string name="submitButtonText">提交</string>
+    <string name="deleteUserButtonText">删除</string>
 
     /*
     * url
