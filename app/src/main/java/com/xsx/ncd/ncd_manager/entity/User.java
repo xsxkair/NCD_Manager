@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "User")
-public class User {
+public class User extends BaseEntity{
 
     @DatabaseField(generatedId = true, allowGeneratedIdInsert = true)
     private Integer id;
@@ -12,7 +12,7 @@ public class User {
     @DatabaseField(canBeNull = false)
     private String userid;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(canBeNull = false, unique = true)
     private String name;
 
     @DatabaseField(canBeNull = true, defaultValue = "false", columnDefinition = "bit(1)")
@@ -81,6 +81,16 @@ public class User {
 
     public void setDep(String dep) {
         this.dep = dep;
+    }
+
+    public void resetUser(){
+        this.id = null;
+        this.name = null;
+        this.userid = null;
+        this.age = null;
+        this.men = null;
+        this.phone = null;
+        this.dep = null;
     }
 
     @Override

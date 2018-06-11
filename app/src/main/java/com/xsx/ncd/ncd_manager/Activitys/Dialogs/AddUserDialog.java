@@ -78,8 +78,8 @@ public class AddUserDialog extends DialogFragment {
         userSexRadioGroup = view.findViewById(R.id.userSexRadioGroup);
         userPhoneEditText = view.findViewById(R.id.userPhoneEditText);
         userDepEditText = view.findViewById(R.id.userDepEditText);
-        cancelAddUserButton = view.findViewById(R.id.cancelAddUserButton);
-        submitAddUserButton = view.findViewById(R.id.submitAddUserButton);
+        //cancelAddUserButton = view.findViewById(R.id.cancelAddUserButton);
+        //submitAddUserButton = view.findViewById(R.id.submitAddUserButton);
 
         userNameEditView.addTextChangedListener(new TextWatcher() {
             @Override

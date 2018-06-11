@@ -8,13 +8,16 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.xsx.ncd.ncd_manager.entity.Card;
+import com.xsx.ncd.ncd_manager.entity.TestData;
 import com.xsx.ncd.ncd_manager.entity.User;
 
 import java.sql.SQLException;
 
 public class SqliteDataBaseHelper extends OrmLiteSqliteOpenHelper {
 
-    private static final String dataBaseFileName = "/mnt/sdcard/whnewcando/xsx.db";
+   private static final String dataBaseFileName = "/mnt/sdcard/whnewcando/xsx.db";
+   //private static final String dataBaseFileName = "xsx.db";
 
     // 本类的单例实例
     private static SqliteDataBaseHelper instance;
@@ -48,6 +51,8 @@ public class SqliteDataBaseHelper extends OrmLiteSqliteOpenHelper {
 
         try {
             TableUtils.createTable(connectionSource, User.class);
+            TableUtils.createTable(connectionSource, Card.class);
+            TableUtils.createTable(connectionSource, TestData.class);
             Log.d("xsx","create xsx.db success");
         } catch (SQLException e) {
             Log.d("xsx","create xsx.db error: "+e.getMessage());

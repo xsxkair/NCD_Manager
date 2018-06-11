@@ -21,6 +21,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/drawables/images',
+                            'src/main/res/drawables/icos',
+                            'src/main/res/drawables/styles',
+                            'src/main/res/drawables',
+
+                            'src/main/res/layouts/activitys',
+                            'src/main/res/layouts/dialogs',
+                            'src/main/res/layouts/views',
+                            'src/main/res/layouts/others',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
 }
 
 dependencies {
@@ -45,6 +63,8 @@ dependencies {
     implementation files('libs/classes.jar')
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38'
+    implementation 'com.contrarywind:Android-PickerView:4.1.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.yoojia:next-qrcode:2.0-2'
 }

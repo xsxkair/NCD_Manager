@@ -1,11 +1,8 @@
 package com.xsx.ncd.ncd_manager.Dao.Services;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.xsx.ncd.ncd_manager.Dao.UserDao;
-import com.xsx.ncd.ncd_manager.SerialDriver.SerialDefine;
-import com.xsx.ncd.ncd_manager.SerialDriver.SerialEntity;
 import com.xsx.ncd.ncd_manager.entity.User;
 
 import java.util.List;
@@ -30,6 +27,38 @@ public class UserService {
                 userDao.add(user);
 
                 emitter.onNext(true);
+                emitter.onComplete();
+            }
+        });
+
+        return observable;
+    }
+
+    public Observable<Boolean> deleteUserService(User user){
+        Observable<Boolean> observable = Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+
+                userDao.delete(user);
+
+                emitter.onNext(true);
+                emitter.onComplete();
+            }
+        });
+
+        return observable;
+    }
+
+    public Observable<Boolean> updateUserService(User user){
+        Observable<Boolean> observable = Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+
+                userDao.update(user);
+
+                emitter.onNext(true);
+
+                emitter.onComplete();
             }
         });
 
@@ -42,7 +71,7 @@ public class UserService {
             public void subscribe(ObservableEmitter<List<User>> emitter) throws Exception {
 
                 List<User> userList = userDao.all();
-                Log.d("xsx", "user list size: "+userList.size());
+
                 emitter.onNext(userList);
                 emitter.onComplete();
             }

@@ -12,10 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.xsx.ncd.ncd_manager.Activitys.Adapter.UserAdapter;
+import com.xsx.ncd.ncd_manager.Activitys.Adapter.UserDecoration;
 import com.xsx.ncd.ncd_manager.Activitys.Dialogs.AddUserDialog;
 import com.xsx.ncd.ncd_manager.Activitys.Dialogs.WaitDialog;
 import com.xsx.ncd.ncd_manager.Dao.DataBaseMethods;
@@ -29,7 +31,7 @@ import butterknife.ButterKnife;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class UserManagementActivity extends Activity implements AddUserDialog.AddUserDialogActionListener {
+public class UserManagementActivity extends Activity implements AddUserDialog.AddUserDialogActionListener{
 
     @BindView(R.id.addUserImageView)
     ImageView addUserImageView;
@@ -45,8 +47,8 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
     EditText userAgeEditView;
     @BindView(R.id.userSexMenRadioButton)
     RadioButton userSexMenRadioButton;
-    @BindView(R.id.btnWoman)
-    RadioButton btnWoman;
+    @BindView(R.id.userSexWomenRadioButton)
+    RadioButton userSexWomenRadioButton;
     @BindView(R.id.userSexRadioGroup)
     RadioGroup userSexRadioGroup;
     @BindView(R.id.userPhoneEditText)
@@ -62,10 +64,14 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
     private AddUserDialog addUserDialog;
     private WaitDialog waitDialog;
 
-    private Observer<Boolean> addUserObserver;
+    private Observer<Boolean> userActionObserver;
 
     private UserAdapter userAdapter;
     private Observer<List<User>> userListObserver;
+
+    private User selectUser = null;
+    private User newUser = new User();
+    private User currentUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,116 +79,201 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
         setContentView(R.layout.activity_user_management);
         ButterKnife.bind(this);
 
+        resetUserInfoView();
+
         addUserDialog = new AddUserDialog();
-        waitDialog = new WaitDialog();
 
         addUserImageView.setOnClickListener(v -> {
-            addUserDialog.show(getFragmentManager(), "xsx");
+            addUserDialog.show(getFragmentManager(), "xsx2");
+            createNewUser();
         });
 
-
-        addUserObserver = new Observer<Boolean>() {
+        userActionObserver = new Observer<Boolean>() {
+            private Disposable disposable = null;
             @Override
             public void onSubscribe(Disposable d) {
-
+                disposable = d;
             }
 
             @Override
             public void onNext(Boolean aBoolean) {
-                Log.d("xsx", "add user success");
+                Toast.makeText(UserManagementActivity.this, R.string.actionSuccessText, Toast.LENGTH_SHORT).show();
+                DataBaseMethods.getInstance().queryAllUser(userListObserver);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d("xsx", e.getMessage());
+                Toast.makeText(UserManagementActivity.this, R.string.ActionFailText, Toast.LENGTH_SHORT).show();
+                disposable.dispose();
             }
 
             @Override
             public void onComplete() {
-
+                disposable.dispose();
             }
         };
 
-        userAdapter = new UserAdapter(null, R.layout.layout_user_listview_item);
-        ItemDragAndSwipeCallback itemDragAndSwipeCallback = new ItemDragAndSwipeCallback(userAdapter);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
-        itemTouchHelper.attachToRecyclerView(userRecyclerView);
-
-
-        // 开启滑动删除
-        userAdapter.enableSwipeItem();
-        userAdapter.setOnItemSwipeListener(new OnItemSwipeListener() {
-            @Override
-            public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d("xsx", "onItemSwipeStart= " + pos);
-            }
-
-            @Override
-            public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d("xsx", "clearView= " + pos);
-            }
-
-            @Override
-            public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-                Log.d("xsx", "onItemSwiped= " + pos);
-            }
-
-            @Override
-            public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
-                Log.d("xsx", "onItemSwipeMoving= " + viewHolder.getAdapterPosition());
-            }
+        userAdapter = new UserAdapter(null, this, R.layout.layout_user_listview_item);
+        userAdapter.setOnItemClickListener((v, position, user)->{
+            Log.d("xsx", "click: "+position);
+            selectUser(user);
         });
-
-
         userRecyclerView.setAdapter(userAdapter);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        userRecyclerView.addItemDecoration(new UserDecoration(2));
         userListObserver = new Observer<List<User>>() {
+            private Disposable disposable = null;
             @Override
             public void onSubscribe(Disposable d) {
-
+                disposable = d;
             }
 
             @Override
             public void onNext(List<User> users) {
-                userAdapter.setNewData(users);
+                userAdapter.updateUserData(users);
+                resetUserInfoView();
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d("xsx", "query all user error: " + e.getMessage());
+                Toast.makeText(UserManagementActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                disposable.dispose();
             }
 
             @Override
             public void onComplete() {
-
+                disposable.dispose();
             }
         };
 
         freshUserListImageView.setOnClickListener(v -> {
-            showAllUser();
+            DataBaseMethods.getInstance().queryAllUser(userListObserver);
         });
+
+        deleteUserButton.setOnClickListener(v -> {
+            //add new user, delete nothing
+            if(selectUser == null){
+                ;
+            }
+            //delete user
+            else{
+                DataBaseMethods.getInstance().deleteUser(userActionObserver, currentUser);
+            }
+        });
+
+        submitUserButton.setOnClickListener(v -> {
+
+            fillCurrentUserInfo();
+
+            if(currentUser == null)
+                return;
+            else if(currentUser.getName() == null || currentUser.getName().length() <= 0)
+            {
+                Toast.makeText(this, R.string.userNameIsRequired, Toast.LENGTH_SHORT).show();
+            }
+
+            //add new user
+            if(selectUser == null){
+                DataBaseMethods.getInstance().addNewUser(userActionObserver, currentUser);
+            }
+            //edit user info
+            else{
+                DataBaseMethods.getInstance().updateUser(userActionObserver, currentUser);
+            }
+        });
+
+        DataBaseMethods.getInstance().queryAllUser(userListObserver);
+    }
+
+    private void selectUser(User user){
+        selectUser = user;
+        currentUser = selectUser;
+
+        userNameEditView.setEnabled(false);
+        userIdEditView.setEnabled(false);
+        userAgeEditView.setEnabled(true);
+        userSexMenRadioButton.setEnabled(true);
+        userSexWomenRadioButton.setEnabled(true);
+        userSexRadioGroup.setEnabled(true);
+        userPhoneEditText.setEnabled(true);
+        userDepEditText.setEnabled(true);
+        deleteUserButton.setEnabled(true);
+        submitUserButton.setEnabled(true);
+
+        userNameEditView.setText(user.getName());
+        userIdEditView.setText(user.getUserid());
+        userAgeEditView.setText(user.getAge());
+        userSexMenRadioButton.setChecked(user.getMen());
+        userSexWomenRadioButton.setChecked(!user.getMen());
+        userPhoneEditText.setText(user.getPhone());
+        userDepEditText.setText(user.getDep());
+    }
+
+    private void createNewUser(){
+
+        selectUser = null;
+        currentUser = newUser;
+        currentUser.resetUser();
+
+        userNameEditView.setEnabled(true);
+        userIdEditView.setEnabled(true);
+        userAgeEditView.setEnabled(true);
+        userSexMenRadioButton.setEnabled(true);
+        userSexWomenRadioButton.setEnabled(true);
+        userSexRadioGroup.setEnabled(true);
+        userPhoneEditText.setEnabled(true);
+        userDepEditText.setEnabled(true);
+        deleteUserButton.setEnabled(false);
+        submitUserButton.setEnabled(true);
+
+        userNameEditView.setText(null);
+        userIdEditView.setText(null);
+        userAgeEditView.setText(null);
+        userSexMenRadioButton.setChecked(true);
+        userSexWomenRadioButton.setChecked(false);
+        userPhoneEditText.setText(null);
+        userDepEditText.setText(null);
+    }
+
+    private void fillCurrentUserInfo(){
+        if(currentUser != null){
+            currentUser.setName(userNameEditView.getText().toString());
+            currentUser.setAge(userAgeEditView.getText().toString());
+            currentUser.setMen(userSexMenRadioButton.isChecked());
+            currentUser.setPhone(userPhoneEditText.getText().toString());
+            currentUser.setDep(userDepEditText.getText().toString());
+            currentUser.setUserid(userIdEditView.getText().toString());
+        }
+    }
+
+    private void resetUserInfoView(){
+        userNameEditView.setEnabled(false);
+        userIdEditView.setEnabled(false);
+        userAgeEditView.setEnabled(false);
+        userSexMenRadioButton.setEnabled(false);
+        userSexWomenRadioButton.setEnabled(false);
+        userSexRadioGroup.setEnabled(false);
+        userPhoneEditText.setEnabled(false);
+        userDepEditText.setEnabled(false);
+        deleteUserButton.setEnabled(false);
+        submitUserButton.setEnabled(false);
+
+        userNameEditView.setText(null);
+        userIdEditView.setText(null);
+        userAgeEditView.setText(null);
+        userSexMenRadioButton.setChecked(true);
+        userSexWomenRadioButton.setChecked(false);
+        userPhoneEditText.setText(null);
+        userDepEditText.setText(null);
     }
 
     @Override
     public void onSubmitSaveUser(User user) {
-        addNewUser(user);
+
     }
 
     @Override
     public void onCancelSaveUser() {
-        Log.d("xsx", "cancel user");
-    }
 
-    private void addNewUser(User user) {
-        waitDialog.show(getFragmentManager(), "wait");
-
-
-        DataBaseMethods.getInstance().addNewUser(addUserObserver, user);
-
-        waitDialog.dismiss();
-    }
-
-    private void showAllUser() {
-        DataBaseMethods.getInstance().queryAllUser(userListObserver);
     }
 }

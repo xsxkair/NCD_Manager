@@ -7,4 +7,13 @@
         <item>@drawable/lunch_item3</item>
         <item>@drawable/lunch_item4</item>
     </integer-array>
+
+    <string-array name="NCD_Test_Item_Array">
+        <item>ALL</item>
+        <item>NTpro-BNP</item>
+        <item>Myo</item>
+        <item>cTnI</item>
+        <item>CK-MB</item>
+    </string-array>
+
 </resources>

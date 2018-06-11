@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/confirmDialogTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ncd_blue"
+        android:text="@string/SoftVersionText"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_24"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/confirmDialogContentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ConmpanyPhoneText"
+        android:textSize="@dimen/sp_20"
+        android:layout_below="@id/confirmDialogTitleTextView"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_50"
+        android:paddingStart="@dimen/dp_50"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/dialog_content_shape"/>
+
+    <Button
+        android:id="@+id/confirmDialogOKButton"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="wrap_content"
+        android:text="@string/button_confirm_text"
+        android:background="@drawable/button_background"
+        android:textSize="@dimen/sp_24"
+        android:textColor="@color/white"
+        android:layout_below="@id/confirmDialogContentTextView"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
