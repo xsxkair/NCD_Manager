@@ -76,14 +76,6 @@ public class TestDataAdapter extends RecyclerView.Adapter<TestDataViewHolder> {
         return this.dataSize;
     }
 
-    public TestDataViewHolder getSelectItemHolder() {
-        return selectItemHolder;
-    }
-
-    public void setSelectItemHolder(TestDataViewHolder selectItemHolder) {
-        this.selectItemHolder = selectItemHolder;
-    }
-
     public int getSelectItemPosition() {
         return selectItemPosition;
     }

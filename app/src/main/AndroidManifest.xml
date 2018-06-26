@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
 
     <application
         android:name=".Activitys.MyApplication"
@@ -46,10 +50,12 @@
         <activity android:name=".Activitys.UserManagementActivity" />
         <activity android:name=".Activitys.DataQueryActivity" />
         <activity android:name=".Activitys.TestDetailActivity" />
-        <activity android:name=".Activitys.NetSetActivity" />
         <activity android:name=".Activitys.AboutUsActivity" />
-        <activity android:name=".SelectUserActivity" />
-        <activity android:name=".Activitys.DeviceInfoActivity"></activity>
+        <activity android:name=".Activitys.SelectUserActivity" />
+        <activity android:name=".Activitys.DeviceInfoActivity" />
+        <activity android:name=".Activitys.EthernetSettingActivity" />
+        <activity android:name=".Activitys.WifiSetActivity" />
+        <activity android:name=".Activitys.ServerSetActivity"></activity>
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ public class SerialService extends Service{
         localBuilder.setContentText("正在运行...");
         startForeground(2, localBuilder.build());
 
-        serialThread = new SerialThread(true);
+        serialThread = new SerialThread();
         serialThread.start();
     }
 

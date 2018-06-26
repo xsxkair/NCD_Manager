@@ -1,5 +1,7 @@
 package com.xsx.ncd.ncd_manager.SerialDriver.DeviceSerial;
 
+import android.util.Log;
+
 import com.friendlyarm.AndroidSDK.HardwareControler;
 import com.xsx.ncd.ncd_manager.Tools.CheckSum;
 
@@ -31,7 +33,7 @@ public class DeviceSerialService {
     public void openSerial() throws Exception {
 
         serialDeviceFile = HardwareControler.openSerialPort(DeviceSerialDefine.SERIAL_FILE_NAME, DeviceSerialDefine.SERIAL_BAUD, 8, 1);
-
+        Log.d("xsx", " "+serialDeviceFile);
         if(serialDeviceFile < 0)
             throw new Exception("open device Serial Fail");
     }

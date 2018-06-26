@@ -4,6 +4,7 @@
     <string name="device_name">荧光免疫定量分析仪</string>
     <string name="ncd_company_name_text">武汉纽康度生物科技股份有限公司</string>
     <string name="Ncd_Company_Website_text">http://www.whnewcando.com</string>
+    <string name="SuperAdminPassword">201300</string>
 
 
     /*
@@ -15,6 +16,7 @@
     <string name="ReportPassText">合格</string>
     <string name="ReportNoPassText">不合格</string>
     <string name="TestDataIntentNameText">TestDataIntent</string>
+    <string name="space_string"> </string>
 
 
     /*
@@ -43,6 +45,7 @@
     <string name="setting_menu_data_query_text">数据查询</string>
     <string name="setting_menu_other_set_text">其他设置</string>
     <string name="setting_menu_about_us_text">关于</string>
+    <string name="setting_menu_net_select_dialog_title">请选择</string>
 
 
     /*
@@ -115,6 +118,45 @@
     <string name="DeviceAddrText">设备地址:</string>
     <string name="DeviceUserText">责&#160;&#160;&#160;任&#160;&#160;人:</string>
     <string name="DevicePhoneText">联系方式:</string>
+    <string name="CheckPermissionText">确认权限</string>
+    <string name="PleaseInputPassword">请输入密码:</string>
+    <string name="ConfirmDialogTag">confirmdialog</string>
+    <string name="InputDialogTag">inputdialog</string>
+
+    <!-- eth config -->
+    <string name="eth_switch_text">Ethernet开关</string>
+    <string name="eth_config">有线网设置</string>
+    <string name="eth_con_type">connect type：</string>
+    <string name="eth_con_type_dhcp">DHCP</string>
+    <string name="eth_con_type_static">Static IP</string>
+    <string name="eth_mask">Mask address:</string>
+    <string name="eth_dns">DNS address：</string>
+    <string name="eth_gw">Gateway address：</string>
+    <string name="eth_ipaddr">IP address：</string>
+
+    <!-- wifi config -->
+    <string name="wifi_switch_text">WLAN开关</string>
+    <string name="wifi_msg_error">WLAN错误</string>
+    <string name="wifi_msg_openning">正在打开WLAN</string>
+    <string name="wifi_msg_closing">正在关闭WLAN</string>
+    <string name="wifi_msg_opened">WLAN已打开</string>
+    <string name="wifi_msg_closed">WLAN已关闭</string>
+    <string name="wifi_msg_scan_fail">扫描失败</string>
+    <string name="wifi_status_saved">已保存</string>
+    <string name="wifi_status_connected">已连接</string>
+    <string name="wifi_status_disconnected">已断开</string>
+    <string name="wifi_action_dialog_title">请选择</string>
+    <string name="wifi_dialog_title">请输入</string>
+    <string name="wifi_dialog_input_label">WIFI密码：</string>
+    <string name="wifi_state_connecting">连接中...</string>
+    <string name="wifi_state_AUTHENTICATING">正在验证身份信息...</string>
+    <string name="wifi_state_OBTAINING_IPADDR">正在获取IP地址...</string>
+    <string name="wifi_state_FAILED">连接失败</string>
+    <string name="wifi_unsuport_security">不支持的加密方式</string>
+
+    <!-- wifi config -->
+    <string name="server_ip">服务器IP：</string>
+    <string name="server_port">服务器端口号：</string>
 
     /*
     * url
@@ -129,17 +171,36 @@
 
     <string name="waitting_dialog_text">请等待。。。</string>
 
-
     /*
-    * 系统设置xml key，默认值。定义
+    * msg
     */
-    <string name="system_device_id_key">deviceid</string>
-    <string name="system_device_user_key">deviceuser</string>
-    <string name="system_device_addr_key">deviceaddr</string>
-    <string name="system_device_phone_key">devicephone</string>
+    <string name="msg_save_success">保存成功</string>
 
     /*
     * button text
     */
+    <string name="button_back_text">返回</string>
+    <string name="button_cancel_text">取消</string>
     <string name="button_confirm_text">确定</string>
+    <string name="button_save_text">保存</string>
+    <string name="button_unsave_text">取消保存</string>
+    <string name="button_connect_text">连接</string>
+
+    /*
+    * dialog title
+    */
+    <string name="dialog_title_error_text">错误</string>
+    <string name="dialog_title_warn_text">警告</string>
+    <string name="dialog_title_info_text">信息</string>
+
+    /*
+    * dialog content
+    */
+    <string name="dialog_content_password_error_text">密码错误</string>
+    <string name="dialog_content_parm_error_text">参数错误</string>
+    <string name="dialog_content_save_fail_text">保存失败</string>
+    <string name="dialog_content_server_ip_error_text">服务器 IP 错误</string>
+    <string name="dialog_content_server_port_error_text">服务器 端口号 错误</string>
+
+
 </resources>

@@ -43,34 +43,12 @@ public class AddUserDialog extends DialogFragment {
         public void onCancelSaveUser();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        try{
-            addUserDialogActionListener = (AddUserDialogActionListener)context;
-        }catch(ClassCastException e){
-            throw  new ClassCastException(context.toString()
-                    + " must implement AddUserDialogActionListener");
-        }
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        try{
-            addUserDialogActionListener = (AddUserDialogActionListener)activity;
-        }catch(ClassCastException e){
-            throw  new ClassCastException(activity.toString()
-                    + " must implement AddUserDialogActionListener");
-        }
-
-        super.onAttach(activity);
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_add_user, container);
-
+        Log.d("xsx", "dialog init 22222");
         userNameEditView = view.findViewById(R.id.userNameEditView);
         userIdEditView = view.findViewById(R.id.userIdEditView);
         userAgeEditView = view.findViewById(R.id.userAgeEditView);
@@ -103,16 +81,7 @@ public class AddUserDialog extends DialogFragment {
 
         user = new User();
 
-        submitAddUserButton.setOnClickListener(v->{
-            submitAction();
 
-            dismiss();
-        });
-
-        cancelAddUserButton.setOnClickListener(v->{
-            addUserDialogActionListener.onCancelSaveUser();
-            dismiss();
-        });
 
         return view;
     }

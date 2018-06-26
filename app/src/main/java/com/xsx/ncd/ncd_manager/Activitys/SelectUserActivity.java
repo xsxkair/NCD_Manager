@@ -1,4 +1,4 @@
-package com.xsx.ncd.ncd_manager;
+package com.xsx.ncd.ncd_manager.Activitys;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import com.xsx.ncd.ncd_manager.Activitys.Adapter.UserAdapter;
 import com.xsx.ncd.ncd_manager.Activitys.Adapter.UserDecoration;
 import com.xsx.ncd.ncd_manager.Activitys.UserManagementActivity;
 import com.xsx.ncd.ncd_manager.Dao.DataBaseMethods;
+import com.xsx.ncd.ncd_manager.R;
 import com.xsx.ncd.ncd_manager.entity.User;
 
 import java.util.List;

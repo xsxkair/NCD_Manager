@@ -16,4 +16,10 @@
         <item>CK-MB</item>
     </string-array>
 
+    <string-array name="net_set_menu_items">
+        <item>WLAN</item>
+        <item>Ethernet</item>
+        <item>Server</item>
+    </string-array>
+
 </resources>

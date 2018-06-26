@@ -5,6 +5,7 @@ import com.xsx.ncd.ncd_manager.SerialDriver.DeviceSerial.DeviceSerialDefine;
 import com.xsx.ncd.ncd_manager.SerialDriver.DeviceSerial.DeviceSerialEntity;
 import com.xsx.ncd.ncd_manager.SerialDriver.DeviceSerial.DeviceSerialResultFunction;
 import com.xsx.ncd.ncd_manager.SerialDriver.DeviceSerial.DeviceSerialService;
+import com.xsx.ncd.ncd_manager.SerialDriver.GPRSSerial.GprsSerialService;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -12,9 +13,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SerialMethods {
 
-
-
     private DeviceSerialService deviceSerialService;
+
+    private GprsSerialService gprsSerialService;
 
     private SerialMethods(){
 
@@ -33,12 +34,18 @@ public class SerialMethods {
     public void serialMethodInit() throws Exception {
         deviceSerialService = new DeviceSerialService();
         deviceSerialService.DeviceSerialInit();
+
+        gprsSerialService = new GprsSerialService();
+        gprsSerialService.GprsSerialInit();
     }
 
     public DeviceSerialService getDeviceSerialService() {
         return deviceSerialService;
     }
 
+    public GprsSerialService getGprsSerialService() {
+        return gprsSerialService;
+    }
 
 //true 01 03 80 01 00 04 74 72 75 65 49
     //false 01 03 80 01 00 05 66 61 6c 73 65 95

@@ -60,10 +60,6 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
     @BindView(R.id.submitUserButton)
     Button submitUserButton;
 
-
-    private AddUserDialog addUserDialog;
-    private WaitDialog waitDialog;
-
     private Observer<Boolean> userActionObserver;
 
     private UserAdapter userAdapter;
@@ -81,10 +77,7 @@ public class UserManagementActivity extends Activity implements AddUserDialog.Ad
 
         resetUserInfoView();
 
-        addUserDialog = new AddUserDialog();
-
         addUserImageView.setOnClickListener(v -> {
-            addUserDialog.show(getFragmentManager(), "xsx2");
             createNewUser();
         });
 

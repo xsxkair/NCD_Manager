@@ -16,10 +16,6 @@ public class SerialThread extends Thread {
         threadControlFlag = true;
     }
 
-    public SerialThread(boolean status){
-        threadControlFlag = status;
-    }
-
     public void stopSerialThread(){
         threadControlFlag = false;
     }

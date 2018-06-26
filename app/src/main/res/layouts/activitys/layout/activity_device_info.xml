@@ -26,7 +26,8 @@
             android:id="@+id/deviceInfoSetImageView"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_100"
-            android:src="@drawable/device_set"/>
+            android:src="@drawable/device_set"
+            android:clickable="true"/>
 
         <Switch
             android:id="@+id/modifyDeviceInfoSwitch"
